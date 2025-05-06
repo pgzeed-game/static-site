@@ -1,8 +1,11 @@
+# ใช้ Nginx base image ขนาดเล็ก
 FROM nginx:alpine
 
-# ติดตั้ง git เพิ่มเข้าไปก่อน COPY อื่น ๆ
+# ติดตั้ง git (Railway/Render บางกรณีรัน runtime script ที่ต้องใช้ git)
 RUN apk add --no-cache git
 
+# คัดลอกไฟล์ config nginx
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY ambplay.in /site/ambplay.in
-COPY amb44king.vip /site/amb44king.vip
+
+# คัดลอก static site ทั้งหมด
+COPY site /site
